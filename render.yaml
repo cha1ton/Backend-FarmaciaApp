@@ -1,0 +1,20 @@
+databases:
+  - name: farmacia_app-db
+    databaseName: sem15_bd_farmacia
+    user: sem15_bd_farmacia_user
+
+services:
+  - type: web
+    name: backend-farmacia
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: farmacia_app-db
+          property: connectionString
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
